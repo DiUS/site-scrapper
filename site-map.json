@@ -1,0 +1,34 @@
+{
+  "pages": {
+    "home": {
+      "name": "home",
+      "contentSelector": ".content .trending-subreddits"
+    },
+    "new": {
+      "name": "new",
+      "url": "new",
+      "contentSelector": ".nav-buttons a"
+    },
+    "wiki": {
+      "name": "wiki",
+      "url": "wiki",
+      "pages": {
+        "view": {
+          "name": "view",
+          "url": "index",
+          "contentSelector": "#wiki_the_essentials__________"
+        },
+        "history": {
+          "name": "history",
+          "url": "revisions/index",
+          "contentSelector": "#siteTable"
+        },
+        "talk": {
+          "name": "talk",
+          "url": "discussions/index",
+          "contentSelector": ".description"
+        }
+      }
+    }
+  }
+}
