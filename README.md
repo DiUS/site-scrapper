@@ -1,7 +1,7 @@
 ## site-scrapper
 Site scrapping utility for Node.js  
 
-### Use 
+### Use
 ```javascript
 const scrapper = require('site-scrapper')
 
@@ -59,7 +59,15 @@ Site map example
 * `callback` \<Function\> A callback function
 
 ##### Output
-Function returns result in the following format `[{ pageName1: pageContent }, ... ]`
+Function returns result in the following format
+```json
+{
+  "pageName1": "pageContent",
+  "pageName2": {
+    "subPageName1": "subPage1Content"
+  }
+}
+```
 
 #### scrapePage()
 ##### Options
@@ -71,4 +79,4 @@ Function returns result in the following format `[{ pageName1: pageContent }, ..
 * `callback` \<Function\> A callback function
 
 ##### Output
-Function returns result in the following format `{ pageName: pageContent }`
+Function returns page content as `String`

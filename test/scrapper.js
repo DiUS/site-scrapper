@@ -6,8 +6,8 @@ describe('scrapper', () => {
 
   before(() => {
     nock('http://test.com/').get('/index').reply(200, '<h1>test index</h1>')
-    nock('http://test.com/').get('/page1').reply(200, '<h1>page1 content</h1>')
-    nock('http://test.com/').get('/page2').reply(200, '<h1>page2 content</h1>')
+    nock('http://test.com/').get('/page1url').reply(200, '<h1>page1 content</h1>')
+    nock('http://test.com/').get('/page2url').reply(200, '<h1>page2 content</h1>')
   })
 
   after(() => ( nock.cleanAll() ))
@@ -19,7 +19,7 @@ describe('scrapper', () => {
       const page = { url: 'index', name: 'index', contentSelector: 'h1' }
       scrapper.scrapePage(baseUrl, page, (err, pageContent) => {
         assert.ifError(err)
-        assert.equal(pageContent.index, 'test index')
+        assert.equal(pageContent, 'test index')
         done()
       })
     })
@@ -42,12 +42,12 @@ describe('scrapper', () => {
     it('should scrape pages list', (done) => {
       const baseUrl = 'http://test.com/'
       const pages = {
-        page1: { name: 'page1', url: 'page1', contentSelector: 'h1' },
-        page2: { name: 'page2', url: 'page2', contentSelector: 'h1' }
+        page1: { name: 'page1name', url: 'page1url', contentSelector: 'h1' },
+        page2: { name: 'page2name', url: 'page2url', contentSelector: 'h1' }
       }
       scrapper.scrapePagesList(baseUrl, pages, (err, pagesContent) => {
         assert.ifError(err)
-        assert.deepEqual(pagesContent, [{ page1: 'page1 content'}, {page2: 'page2 content' }])
+        assert.deepEqual(pagesContent, { page1name: 'page1 content', page2name: 'page2 content' })
         done()
       })
     })
@@ -55,13 +55,13 @@ describe('scrapper', () => {
     it('should handle error', (done) => {
       const baseUrl = 'ugly'
       const pages = {
-        test1: { name: 'test1', url: 'test1Url' },
-        test2: { name: 'test2', url: 'test2Url' }
+        test1: { name: 'test1', url: 'test1url' },
+        test2: { name: 'test2', url: 'test2url' }
       }
       scrapper.scrapePagesList(baseUrl, pages, (err, pagesContent) => {
         assert(err)
         assert.equal(err.code, 'ECONNREFUSED')
-        assert.deepEqual(pagesContent, [ undefined ])
+        assert(!pagesContent)
         done()
       })
     })
