@@ -1,9 +1,10 @@
 {
   "name": "scrapper",
   "version": "1.0.0",
-  "description": "",
+  "description": "Site scrapping utility",
   "scripts": {
     "start": "node example",
+    "lint": "eslint .",
     "test": "mocha"
   },
   "keywords": [],
@@ -15,6 +16,7 @@
     "url-join": "^1.1.0"
   },
   "devDependencies": {
+    "eslint": "^2.13.1",
     "mocha": "^2.5.3",
     "nock": "^8.0.0"
   }
