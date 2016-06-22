@@ -32,7 +32,7 @@ Site map example
       "url": "blog",
       "pages": {
         "latest": {
-          "name": "lates",
+          "name": "latest",
           "url": "latest",
           "contentSelector": ".blog-posts"
         },
