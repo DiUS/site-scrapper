@@ -1,4 +1,5 @@
 const async = require('async')
+const _ = require('lodash')
 const scrapeIt = require('scrape-it')
 const urljoin = require('url-join')
 
@@ -7,7 +8,7 @@ const scrapePage = (baseUrl, page, cb) => {
   const opts = { content: page.contentSelector }
   scrapeIt(url, opts, (err, pageContent) => {
     if (err) return cb(err)
-    cb(null, { [page.name]: pageContent.content })
+    cb(null, pageContent.content)
   })
 }
 
@@ -20,7 +21,11 @@ const scrapePagesList = (baseUrl, pages, cb) => {
     }
 
     scrapePage(baseUrl, page, cb)
-  }, cb)
+  }, (err, result) => {
+    if (err) return cb(err)
+    cb(null, _(pages).map('name').zipObject(result).value())
+  })
 }
+
 
 module.exports = { scrapePage, scrapePagesList }
