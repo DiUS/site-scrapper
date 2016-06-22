@@ -1,6 +1,6 @@
 {
-  "name": "scrapper",
-  "version": "1.0.0",
+  "name": "site-scrapper",
+  "version": "0.0.1",
   "description": "Site scrapping utility",
   "scripts": {
     "start": "node example",
